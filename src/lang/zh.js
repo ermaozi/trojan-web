@@ -37,12 +37,17 @@ export default {
         version: '系统版本',
         password: '修改密码',
         title: '修改标题',
+        resetDay: '改重置日',
+        resetTitle: '修改流量重置日',
         changeTitle: '修改登录页标题',
         inputTitle: '输入登录页标题',
-        changeTitleSuccess: '修复登录页标题成功!',
+        changeTitleSuccess: '修改登录页标题成功!',
+        changeDaySuccess: '修改流量重置日成功!',
+        closeResetSuccess: '关闭流量重置成功',
         versionTitle: 'trojan管理程序版本',
         passwordTitle: '变更管理员密码',
-        resetSuccess: '重置密码成功!'
+        resetSuccess: '重置密码成功!',
+        meanClose: '0代表关闭流量重置'
     },
     dashboard: {
         memory: '内存',
@@ -50,6 +55,8 @@ export default {
         trojanVersion: 'trojan 版本',
         trojanUser: 'trojan 用户数',
         trojanRuntime: 'trojan 已运行',
+        netSpeed: '网速',
+        netCount: '连接数',
         load: '服务器负载',
         upload: '上传',
         download: '下载',
@@ -72,6 +79,9 @@ export default {
         download: '下载流量',
         total: '总流量',
         quota: '流量限制',
+        expiryDate: '到期日期',
+        setExpire: '设置限期',
+        cancelExpire: '取消限期',
         reset: '重置流量',
         unlimit: '无',
         search: '输入用户名搜索',
@@ -98,6 +108,24 @@ export default {
         success: '成功!',
         resetUser1: '重置用户',
         limitAdmin: '不能创建用户名为admin的用户!',
-        addUser2: '新增用户'
+        addUser2: '新增用户',
+        week: '单周',
+        month: '单月',
+        season: '单季',
+        halfYear: '半年',
+        year: '一年',
+        preset: '预设',
+        days: '天数',
+        setExpireSuccess: '设置用户限期成功!',
+        cancelExpireSuccess: '取消用户限期成功!',
+        remaining: '剩余天数'
+    },
+    request: {
+        requestError: '请求出错',
+        authFail: '授权失败，请重新登录',
+        accessDenied: '拒绝访问',
+        notFound: '请求错误,未找到该资源',
+        serverError: '服务端错误',
+        connectError: '连接服务器失败'
     }
 }

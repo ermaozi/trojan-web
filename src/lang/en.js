@@ -16,12 +16,17 @@ export default {
         version: 'System Version',
         password: 'Reset Password',
         title: 'Change Title',
+        resetDay: 'Change Resetday',
+        resetTitle: 'Change data reset day',
         changeTitle: 'Change login page title',
         changeTitleSuccess: 'Change title success!',
+        changeDaySuccess: 'Change data reset day success!',
+        closeResetSuccess: 'Close data reset success!',
         inputTitle: 'input login page title',
         versionTitle: 'Trojan-manager Version',
         passwordTitle: 'change admin password',
-        resetSuccess: 'reset password success!'
+        resetSuccess: 'reset password success!',
+        meanClose: '0 mean close data reset'
     },
     dashboard: {
         memory: 'memory',
@@ -29,6 +34,8 @@ export default {
         trojanVersion: 'Trojan Version',
         trojanUser: 'Trojan User',
         trojanRuntime: 'Trojan Runtime',
+        netSpeed: 'Network Speed',
+        netCount: 'Network Count',
         load: 'Load',
         upload: 'upload',
         download: 'download',
@@ -51,6 +58,9 @@ export default {
         download: 'download',
         total: 'total',
         quota: 'quota',
+        expiryDate: 'expiryDate',
+        setExpire: 'setExpire',
+        cancelExpire: 'cancelExpire',
         reset: 'reset data',
         unlimit: 'unlimit',
         search: 'search username',
@@ -78,6 +88,24 @@ export default {
         success: ' success!',
         resetUser1: 'reset user ',
         limitAdmin: "can't create username is admin",
-        addUser2: 'add user '
+        addUser2: 'add user ',
+        week: 'a week',
+        month: 'a month',
+        season: 'one season',
+        halfYear: 'Half a year',
+        year: 'one year',
+        preset: 'preset',
+        days: 'days',
+        setExpireSuccess: 'setup expire success!',
+        cancelExpireSuccess: 'cancel expire success!',
+        remaining: 'remaining days'
+    },
+    request: {
+        requestError: 'request error',
+        authFail: 'auth fail, please login again',
+        accessDenied: 'access denied',
+        notFound: '404 not found',
+        serverError: 'server error',
+        connectError: 'connect error'
     }
 }

@@ -12,8 +12,9 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="systemVersion(); versionVisible=true">{{ $t('navbar.version') }}</el-dropdown-item>
-                    <el-dropdown-item @click.native="getTitle(); loginVisible=true" v-if="isAdmin">{{ $t('navbar.title') }}</el-dropdown-item>
+                    <el-dropdown-item @click.native="getTitle(); loginVisible=true" v-if="isAdmin" divided>{{ $t('navbar.title') }}</el-dropdown-item>
                     <el-dropdown-item @click.native="dialogVisible=true" v-if="isAdmin">{{ $t('navbar.password') }}</el-dropdown-item>
+                    <el-dropdown-item @click.native="getResetDay(); resetDayVisible=true" v-if="isAdmin">{{ $t('navbar.resetDay') }}</el-dropdown-item>
                     <el-dropdown-item @click.native="handleSetLanguage('zh')" divided>中文</el-dropdown-item>
                     <el-dropdown-item @click.native="handleSetLanguage('en')">English</el-dropdown-item>
                 </el-dropdown-menu>
@@ -32,6 +33,15 @@
                 <p> goVersion: {{ versionList.goVersion }} </p>
                 <div slot="footer" class="dialog-footer">
                     <el-button type="primary" @click="versionVisible = false">{{ $t('ok') }}</el-button>
+                </div>
+            </el-dialog>
+            <el-dialog :modal="false" :title="$t('navbar.resetTitle')" :visible.sync="resetDayVisible" :width="dialogWidth">
+                <el-tooltip effect="dark" :content="$t('navbar.meanClose')" placement="top">
+                    <el-input-number size="small" v-model="resetDay" :min=0 :max=31></el-input-number>
+                </el-tooltip>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="resetDayVisible = false">{{ $t('cancel') }}</el-button>
+                    <el-button type="primary" @click="handleResetDay()">{{ $t('ok') }}</el-button>
                 </div>
             </el-dialog>
             <el-dialog :modal="false" :title="$t('navbar.passwordTitle')" :visible.sync="dialogVisible" :width="dialogWidth">
@@ -64,6 +74,7 @@ import CryptoJS from 'crypto-js'
 import { sleep } from '@/utils/common'
 import { resetPass, check } from '@/api/permission'
 import { version, setLoginInfo } from '@/api/common'
+import { getResetDay, updateResetDay } from '@/api/data'
 
 export default {
     data() {
@@ -93,9 +104,11 @@ export default {
             pwdType: 'password',
             dialogVisible: false,
             versionVisible: false,
+            resetDayVisible: false,
             loginVisible: false,
             dialogWidth: '25%',
             title: '',
+            resetDay: 1,
             form: {
                 password1: '',
                 password2: ''
@@ -148,6 +161,31 @@ export default {
             const result = await check()
             this.title = result.data.title
         },
+        async getResetDay() {
+            const result = await getResetDay()
+            this.resetDay = result.Data.resetDay
+        },
+        async handleResetDay() {
+            const formData = new FormData()
+            formData.set('day', this.resetDay)
+            const result = await updateResetDay(formData)
+            if (result.Msg === 'success') {
+                if (this.resetDay === 0) {
+                    this.$message({
+                        message: this.$t('navbar.closeResetSuccess'),
+                        type: 'success'
+                    })
+                } else {
+                    this.$message({
+                        message: this.$t('navbar.changeDaySuccess'),
+                        type: 'success'
+                    })
+                }
+            } else {
+                this.$message.error(result.Msg)
+            }
+            this.resetDayVisible = false
+        },
         async handleLoginInfo() {
             const formData = new FormData()
             formData.set('title', this.title)
@@ -157,7 +195,6 @@ export default {
                     message: this.$t('navbar.changeTitleSuccess'),
                     type: 'success'
                 })
-                this.userItem = null
                 document.title = this.title
                 this.$store.commit('SET_TITLE', this.title)
             } else {
@@ -219,7 +256,6 @@ export default {
     height: 50px;
     line-height: 50px;
     position: relative;
-    background: #fff;
     transition: left 0.25s;
     .hamburger-container {
         line-height: 46px;
